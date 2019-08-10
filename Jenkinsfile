@@ -1,13 +1,13 @@
-pipeline {
+pipeline{
     agent any
-    stages {
+    stages{
       stage('Lint HTML') {
-        steps {
-          sh ‘cd jenkins-html’
-          sh ‘tidy -q -e *.html’
+        steps{
+          sh 'cd jenkins-html'
+          sh 'tidy -q -e *.html'
         }
       stage('Upload to AWS') {
-        steps {
+        steps{
           withAWS(region:'us-west-2',credentials:'jenkins-aws') {
             s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:'jenkins-html/index.html', bucket:'kb-uda-dend')
           }

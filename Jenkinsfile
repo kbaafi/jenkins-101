@@ -3,7 +3,6 @@ pipeline {
     stages {
       stage(‘Lint HTML’) {
         steps {
-          sh ‘cd jenkins-html’
           sh ‘tidy -q -e *.html’
         }
       stage(‘Upload to AWS’) {
